@@ -1,0 +1,20 @@
+{
+  "test-question": [
+    {
+      "name": "Test Question",
+      "description": "Test Question",
+      "group_reference": "other",
+      "defaults": {
+        "type": "custom",
+        "js": {
+          "question": "{BASE_URL}/questions/test/question.js",
+          "scorer": "{BASE_URL}/questions/test/scorer.js"
+        },
+        "valid_response": {
+          "score": 1,
+          "value": "test"
+        }
+      }
+    }
+  ]
+}

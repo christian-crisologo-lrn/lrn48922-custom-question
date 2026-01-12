@@ -1,0 +1,34 @@
+{
+  "custom_type": "test-question",
+  "type": "custom",
+  "name": "test-question",
+  "editor_layout": "{BASE_URL}/questions/test/authoring_custom_layout.html",
+  "js": {
+    "question": "{BASE_URL}/questions/test/question.js",
+    "scorer": "{BASE_URL}/questions/test/scorer.js"
+  },
+  "version": "v1.0.0",
+  "editor_schema": {
+    "hidden_question": false,
+    "attributes": {
+      "valid_response": {
+        "name": "Attribute used for scoring",
+        "type": "object",
+        "attributes": {
+          "score": {
+            "name": "Points",
+            "description": "Score awarded for the correct answer",
+            "type": "number",
+            "required": true,
+            "default": 1
+          },
+          "value": {
+            "name": "Correct answer",
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
