@@ -89,6 +89,7 @@ module.exports = [
     mode: "development",
     entry: {
       index: "./src/index.js",
+      report: "./src/report.js",
     },
     devtool: "inline-source-map",
     devServer: {
@@ -96,7 +97,14 @@ module.exports = [
     },
     plugins: [
       new HtmlWebpackPlugin({
-        title: "Development",
+        title: "Learnosity Player",
+        filename: "index.html",
+        chunks: ["index"],
+      }),
+      new HtmlWebpackPlugin({
+        title: "Learnosity Reports",
+        filename: "report.html",
+        chunks: ["report"],
       }),
     ],
     output: {

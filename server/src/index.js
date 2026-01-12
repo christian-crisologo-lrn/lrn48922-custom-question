@@ -2,12 +2,12 @@ const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const Learnosity = require('learnosity-sdk-nodejs');
-
-const PORT = 3001;
-
-// key and secret from https://github.com/Learnosity/learnosity-sdk-nodejs
-const LEARNOSITY_KEY = 'yis0TYCu7U9V4o7M';
-const LEARNOSITY_SECRET = '74c5fd430cf1242a527f6223aebd42d30464be22';
+const {
+  getPort,
+  getServerUrl,
+  getLearnosityCredentials,
+  getLearnosityDomain,
+} = require('./config');
 
 const app = express();
 
@@ -17,14 +17,16 @@ app.use(express.json());
 
 app.post('/sign-learnosity-request', (req, res) => {
   const learnositySdk = new Learnosity();
+  const credentials = getLearnosityCredentials();
+  const domain = getLearnosityDomain();
 
   const response = learnositySdk.init(
     'items',
     {
-      consumer_key: LEARNOSITY_KEY,
-      domain: 'localhost',
+      consumer_key: credentials.consumerKey,
+      domain: domain,
     },
-    LEARNOSITY_SECRET,
+    credentials.secret,
     req.body
   );
 
@@ -33,6 +35,9 @@ app.post('/sign-learnosity-request', (req, res) => {
   res.send(response);
 });
 
-http.createServer(app).listen(PORT, () => {
-  console.log(`Listening on port ${PORT}!`);
+const port = getPort();
+const serverUrl = getServerUrl();
+
+http.createServer(app).listen(port, () => {
+  console.log(`Server listening at ${serverUrl}`);
 });

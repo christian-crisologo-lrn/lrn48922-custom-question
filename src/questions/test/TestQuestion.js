@@ -1,4 +1,4 @@
-const PREFIX = "lrn-test-question";
+const LRN_CQ_PREFIX = "lrn-test-question";
 
 class TestQuestion {
   constructor(init, lrnUtils) {
@@ -22,8 +22,8 @@ class TestQuestion {
 
   render() {
     this.el.innerHTML = `
-      <div class="${PREFIX} lrn-response-validation-wrapper">
-        <div class="${PREFIX}-root"></div>
+      <div class="${LRN_CQ_PREFIX} lrn-response-validation-wrapper">
+        <div class="${LRN_CQ_PREFIX}-root"></div>
       </div>
     `;
 
@@ -33,7 +33,7 @@ class TestQuestion {
   }
 
   renderComponent(options = {}) {
-    const container = this.el.querySelector(`.${PREFIX}-root`);
+    const container = this.el.querySelector(`.${LRN_CQ_PREFIX}-root`);
 
     container.innerHTML = `
       <div>

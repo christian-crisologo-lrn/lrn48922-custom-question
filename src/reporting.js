@@ -1,42 +1,57 @@
 import { signLearnosityRequest } from "./signLearnosityRequest";
 import { loadScript } from "./loadScript";
+import { getScriptUrl, USER_ID } from "./util";
 
-const SCRIPT_URL = "https://reports-ie.learnosity.com/?latest-lts";
-
-function getLearnosityRequest(sessionId) {
+function getLearnosityRequest(sessionId, userId = USER_ID) {
   return {
     reports: [
       {
         id: "session-detail",
         type: "session-detail-by-item",
-        user_id: "labs-site",
+        user_id: userId,
         session_id: sessionId,
       },
     ],
   };
 }
 
-export async function runReporting(sessionId) {
-  await loadScript(SCRIPT_URL);
-
+function createReportContainer() {
   const container = document.createElement("div");
-
   container.innerHTML = `
     <div>
       <div id="session-detail"></div>
     </div>
   `;
+  return container;
+}
 
-  document.body.appendChild(container);
+export async function runReporting(sessionId, userId) {
+  try {
+    console.log("Initializing Learnosity Reports API");
+    console.log("Session ID:", sessionId);
+    console.log("User ID:", userId || USER_ID);
 
-  const data = await signLearnosityRequest(getLearnosityRequest(sessionId));
+    await loadScript(getScriptUrl("reports"));
 
-  window.LearnosityReports.init(data, {
-    readyListener() {
-      console.log("learnosity reports ready");
-    },
-    errorListener(err) {
-      console.log("learnosity reports error", err);
-    },
-  });
+    const container = createReportContainer();
+    document.body.appendChild(container);
+
+    const data = await signLearnosityRequest(getLearnosityRequest(sessionId, userId));
+
+    if (!window.LearnosityReports) {
+      throw new Error("LearnosityReports is not available");
+    }
+
+    window.LearnosityReports.init(data, {
+      readyListener() {
+        console.log("Learnosity Reports API ready");
+      },
+      errorListener(err) {
+        console.error("Learnosity Reports API error:", err);
+      },
+    });
+  } catch (error) {
+    console.error("Error initializing reports:", error);
+    throw error;
+  }
 }
