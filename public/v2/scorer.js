@@ -1,4 +1,4 @@
-class TestQuestionScorer {
+class Scorer {
   constructor(question, responseValue) {
     this.question = question;
     this.responseValue = responseValue;
@@ -34,5 +34,5 @@ class TestQuestionScorer {
 }
 
 LearnosityAmd.define([], () => ({
-  Scorer: TestQuestionScorer
+  Scorer
 }));

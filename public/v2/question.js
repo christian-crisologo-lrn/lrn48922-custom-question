@@ -1,6 +1,6 @@
-const LRN_CQ_PREFIX = "lrn-test-question";
+const LRN_CQ_PREFIX2 = "lrn-test-question";
 
-class TestQuestion {
+class Question {
   constructor(init, lrnUtils) {
     this.init = init;
     this.events = init.events;
@@ -22,8 +22,8 @@ class TestQuestion {
 
   render() {
     this.el.innerHTML = `
-      <div class="${LRN_CQ_PREFIX} lrn-response-validation-wrapper">
-        <div class="${LRN_CQ_PREFIX}-root"></div>
+      <div class="${LRN_CQ_PREFIX2} lrn-response-validation-wrapper">
+        <div class="${LRN_CQ_PREFIX2}-root"></div>
       </div>
     `;
 
@@ -33,7 +33,7 @@ class TestQuestion {
   }
 
   renderComponent(options = {}) {
-    const container = this.el.querySelector(`.${LRN_CQ_PREFIX}-root`);
+    const container = this.el.querySelector(`.${LRN_CQ_PREFIX2}-root`);
 
     container.innerHTML = `
       <div>
@@ -107,5 +107,5 @@ class TestQuestion {
 }
 
 LearnosityAmd.define([], () => ({
-  Question: TestQuestion,
+  Question,
 }));

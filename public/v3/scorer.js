@@ -9,7 +9,7 @@
         
         isValid() {
             const { question, response } = this;
-            return !(!response || question.valid_response.value !== response.value);
+            return !(!response || question?.valid_response?.value !== response.value);
         }
         
         validateIndividualResponses() {
@@ -21,7 +21,7 @@
         }
         
         maxScore() {
-            return this.question.score;
+            return this.question?.score || 0;
         }
         
         canValidateResponse() {
