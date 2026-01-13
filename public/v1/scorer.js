@@ -22,6 +22,10 @@ class ScorerV1 {
     return this.isValid();
   }
 
+  score() {
+    return this.isValid() ? this.maxScore() : 0;
+  }
+
   maxScore() {
     return this.validResponse?.score || 0;
   }
