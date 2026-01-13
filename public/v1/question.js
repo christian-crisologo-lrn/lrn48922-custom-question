@@ -34,7 +34,11 @@ class QuestionV1 {
 
   renderComponent(options = {}) {
     const container = this.el.querySelector(`.${LRN_CQ_PREFIX1}-root`);
-
+    let validResponseValue = "";
+    if (this.init.question?.valid_response) {
+      validResponseValue = this.init.question.valid_response.value;
+    }
+    
     container.innerHTML = `
       <div>
         ${
@@ -42,7 +46,7 @@ class QuestionV1 {
             ? `
           <div>
             <div>given answer: ${this.init.response}</div>
-            <div>correct answer: ${this.init.question?.valid_response?.value}</div>
+            <div>correct answer: ${validResponseValue}</div>
           </div>
         `
             : `<input type="text">`
