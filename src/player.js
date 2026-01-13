@@ -29,9 +29,9 @@ function createHeader() {
   header.innerHTML = `
     <h1 style="margin: 0 0 10px 0;">Learnosity Custom Question</h1>
     <p style="margin: 0; color: #666;">
-      <strong>Activity ID:</strong> ${activityId}
-      ${ignoreParam ? `<br><strong>Ignore Attributes:</strong> valid_response` : ''}
-      <br><strong>Environment:</strong> ${env}
+    <strong>Activity ID:</strong> ${activityId}
+    ${ignoreParam ? `<br><strong>Ignore Attributes:</strong> ${ignoreParam.toString()}` : ''}
+    <br><strong>Environment:</strong> ${env}
     </p>
   `;
   return header;

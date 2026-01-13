@@ -1,9 +1,9 @@
 import { signLearnosityRequest } from "./signLearnosityRequest";
 import { loadScript } from "./loadScript";
-import { getScriptUrl, getIgnoreQuestionAttributes, USER_ID } from "./util";
+import { getScriptUrl, USER_ID } from "./util";
 
 function getLearnosityRequest(sessionId, userId = USER_ID) {
-  let ignoreQuestionAttr = getIgnoreQuestionAttributes();
+  // let ignoreQuestionAttr = getIgnoreQuestionAttributes();
 
   return {
     reports: [
@@ -13,7 +13,7 @@ function getLearnosityRequest(sessionId, userId = USER_ID) {
         user_id: userId,
         session_id: sessionId,
         questions_api_init_options:{
-          ...(ignoreQuestionAttr.length > 0 ? { ignore_question_attributes: ignoreQuestionAttr } : {}),
+          // ...(ignoreQuestionAttr.length > 0 ? { ignore_question_attributes: ignoreQuestionAttr } : {}),
           showCorrectAnswers: true
         }
       },
