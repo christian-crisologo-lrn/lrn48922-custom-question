@@ -26,10 +26,6 @@ class ScorerV1 {
     return this.validResponse?.score || 0;
   }
 
-  maxScore() {
-    return (this.validResponse && this.validResponse.score) || 0;
-  }
-
   canValidateResponse() {
     return !!this.validResponse?.value;
   }
