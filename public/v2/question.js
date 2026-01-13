@@ -1,4 +1,4 @@
-const LRN_CQ_PREFIX2 = "lrn-test-question";
+const LRN_CQ_PREFIX2 = "lrn-test-question-v2";
 
 class Question {
   constructor(init, lrnUtils) {
@@ -34,6 +34,10 @@ class Question {
 
   renderComponent(options = {}) {
     const container = this.el.querySelector(`.${LRN_CQ_PREFIX2}-root`);
+    let validResponseValue = "";
+    if (this.init.question?.validation?.valid_response) {
+      validResponseValue = this.init.question.validation.valid_response.value;
+    }
 
     container.innerHTML = `
       <div>
@@ -42,7 +46,7 @@ class Question {
             ? `
           <div>
             <div>given answer: ${this.init.response}</div>
-            <div>correct answer: ${this.init.question?.valid_response?.value}</div>
+            <div>correct answer: ${validResponseValue}</div>
           </div>
         `
             : `<input type="text">`

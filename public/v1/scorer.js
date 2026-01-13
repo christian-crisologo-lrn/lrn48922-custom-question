@@ -1,14 +1,10 @@
+// scoreing via valid_response
+
 class Scorer {
   constructor(question, responseValue) {
     this.question = question;
     this.responseValue = responseValue;
-
-    if (this.question?.valid_response) {
-      this.validResponse = this.question.valid_response ;
-
-    } else if (this.question?.validation?.valid_response) {
-      this.validResponse = this.question.validation.valid_response;
-    }
+    this.validResponse = this.question?.valid_response;
   }
 
   isValid() {
@@ -26,8 +22,8 @@ class Scorer {
     return this.isValid();
   }
 
-  score() {
-    return this.isValid() ? this.maxScore() : 0;
+  maxScore() {
+    return this.validResponse?.score || 0;
   }
 
   maxScore() {

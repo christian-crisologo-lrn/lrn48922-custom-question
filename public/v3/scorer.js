@@ -1,35 +1,45 @@
-(() => {
-    "use strict";
-    
-    class Scorer {
-        constructor(question, response) {
-            this.question = question;
-            this.response = response;
-        }
-        
-        isValid() {
-            const { question, response } = this;
-            return !(!response || question?.valid_response?.value !== response.value);
-        }
-        
-        validateIndividualResponses() {
-            return null;
-        }
-        
-        score() {
-            return this.isValid() ? this.maxScore() : 0;
-        }
-        
-        maxScore() {
-            return this.question?.score || 0;
-        }
-        
-        canValidateResponse() {
-            return true;
-        }
+// scoreing via valid_response and validation
+class Scorer {
+  constructor(question, responseValue) {
+    this.question = question;
+    this.responseValue = responseValue;
+
+    if (this.question?.valid_response) {
+      this.validResponse = this.question.valid_response ;
+
+    } else if (this.question?.validation?.valid_response) {
+      this.validResponse = this.question.validation.valid_response;
     }
-    
-    LearnosityAmd.define([], () => ({
-        Scorer
-    }));
-})();
+  }
+
+  isValid() {
+    const responseValue = this.responseValue ?? null;
+    const validResponse = this.validResponse?.value ?? null;
+
+    if (responseValue === null || validResponse === null) {
+      return false;
+    }
+
+    return responseValue === validResponse;
+  }
+
+  validateIndividualResponses() {
+    return this.isValid();
+  }
+
+  score() {
+    return this.isValid() ? this.maxScore() : 0;
+  }
+
+  maxScore() {
+    return this.validResponse?.score || 0;
+  }
+
+  canValidateResponse() {
+    return !!this.validResponse?.value;
+  }
+}
+
+LearnosityAmd.define([], () => ({
+  Scorer
+}));
