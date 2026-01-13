@@ -1,8 +1,10 @@
 import { signLearnosityRequest } from "./signLearnosityRequest";
 import { loadScript } from "./loadScript";
-import { getScriptUrl, USER_ID } from "./util";
+import { getScriptUrl, getQueryParam, USER_ID } from "./util";
 
 function getLearnosityRequest(sessionId, userId = USER_ID) {
+  const ignoreQuestionAttr = getQueryParam('ignore') ? ['valid_response'] : [];
+
   return {
     reports: [
       {
@@ -10,6 +12,10 @@ function getLearnosityRequest(sessionId, userId = USER_ID) {
         type: "session-detail-by-item",
         user_id: userId,
         session_id: sessionId,
+        questions_api_init_options:{
+          ...(ignoreQuestionAttr.length > 0 ? {ignore_question_attributes: ignoreQuestionAttr} : {}),
+          showCorrectAnswers: true
+        }
       },
     ],
   };
