@@ -52,3 +52,16 @@ export function getBaseUrl() {
 export function getActivityTemplateId() {
   return getQueryParam("activityId") || "TestActivitySB";
 }
+
+export function getIgnoreQuestionAttributes() {
+  let ignoreQuestionAttr = [];
+  const ignore = getQueryParam('ignore');
+
+  if ( ignore === '1' || ignore === 'valid_response') {
+   ignoreQuestionAttr.push('valid_response')
+  } else if ( ignore.indexOf(',') > -1 && ignore.length > 0) {
+    ignore.split(',').forEach(attr => ignoreQuestionAttr.push(attr.trim()));
+  }
+
+  return ignoreQuestionAttr;
+}

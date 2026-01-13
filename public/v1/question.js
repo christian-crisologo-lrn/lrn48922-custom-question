@@ -1,6 +1,6 @@
 const LRN_CQ_PREFIX1 = "lrn-test-question-v1";
 
-class Question {
+class QuestionV1 {
   constructor(init, lrnUtils) {
     this.init = init;
     this.events = init.events;
@@ -107,5 +107,5 @@ class Question {
 }
 
 LearnosityAmd.define([], () => ({
-  Question,
+  Question: QuestionV1
 }));

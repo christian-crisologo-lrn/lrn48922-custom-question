@@ -1,10 +1,10 @@
 import { signLearnosityRequest } from "./signLearnosityRequest";
 import { loadScript } from "./loadScript";
-import { getQueryParam, getScriptUrl, USER_ID, getActivityTemplateId } from "./util";
+import { getQueryParam, getScriptUrl, USER_ID, getActivityTemplateId, getIgnoreQuestionAttributes } from "./util";
 
 function getLearnosityRequest() {
   const activityId = getActivityTemplateId();
-  const ignoreQuestionAttr = getQueryParam('ignore') ? ['valid_response'] : [];
+  const ignoreQuestionAttr = getIgnoreQuestionAttributes();
 
   return {
     activity_id: activityId,
@@ -14,7 +14,7 @@ function getLearnosityRequest() {
     user_id: USER_ID,
     activity_template_id: activityId,
     config: {
-      ignore_question_attributes: ignoreQuestionAttr,
+      ...(ignoreQuestionAttr.length > 0 ? { ignore_question_attributes: ignoreQuestionAttr } : {})
     },
   };
 }

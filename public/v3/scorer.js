@@ -1,5 +1,5 @@
 // scoreing via valid_response and validation
-class Scorer {
+class ScorerV3{
   constructor(question, responseValue) {
     this.question = question;
     this.responseValue = responseValue;
@@ -41,5 +41,5 @@ class Scorer {
 }
 
 LearnosityAmd.define([], () => ({
-  Scorer
+  Scorer: ScorerV3
 }));
