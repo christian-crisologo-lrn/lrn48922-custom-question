@@ -1,4 +1,4 @@
-// scoreing via valid_response
+// scoreing via validation
 
 class Scorer {
   constructor(question, responseValue) {
